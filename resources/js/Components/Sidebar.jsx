@@ -5,10 +5,10 @@ import Profile from '../images/profile.png'
 import { useMenu, useMenuUpdate } from '../Contexts/MenuContext'
 
 
-const Sidebar = () => {
+const Sidebar = (auth) => {
+
 
   const [closeMenu, setCloseMenu] = useState(false);
-
   const handleCloseMenu = ()=>{
 
     setCloseMenu(!closeMenu);
@@ -29,6 +29,16 @@ const Sidebar = () => {
         <div className="burgerMenu"></div> 
       </div>
       <div className="profileContainer">
+         {
+          auth.user ?
+          <>
+          <img src={Profile} alt="profile" className='profile' />
+          <div className="profileContents">
+            <p className='name'>{auth.user.name}</p>
+            <p className='email'>{auth.user.email}</p>
+        </div>
+          </>
+          :
           <>
           <img src={Profile} alt="profile" className='profile' />
           <div className="profileContents">
@@ -36,19 +46,38 @@ const Sidebar = () => {
             <p className='email'>Guest</p>
         </div>
           </>
+         }
       </div>
       <div className={setMenu === false ? "contentsContainer": "contentsContainer active"}>
         <ul>
+            {
+              auth.user ?
+              <>
+                <li className={location.pathname === "/galerija" ? "active" : ""}>
+                <img src={Dashboard} alt="dashboard" />
+                <a href="/galerija">Galerija</a>
+                </li>
+                <li className="addPost">
+                <img src={Dashboard} alt="dashboard" />
+                <a href="/addpost">Nova Objava</a>
+                </li>
+                <li className="logout">
+                <img src={Dashboard} alt="dashboard" />
+                <a onClick={logOut}>Logout</a>
+                </li>
+              </>
+              :
             <>
-            <li className={location.pathname === "/login"?"active":""}>
-                <img src={Dashboard} alt="dashboard" />
-                <a href="/login">Login</a>
-            </li>
-            <li className={location.pathname === "/register" ? "active": ""}>
-                <img src={Dashboard} alt="dashboard" />
-                <a href="/register">Register</a>
-            </li>
-            </>            
+              <li className={location.pathname === "/login"?"active":""}>
+              <img src={Dashboard} alt="dashboard" />
+              <a href="/login">Login</a>
+              </li>
+              <li className={location.pathname === "/register" ? "active": ""}>
+              <img src={Dashboard} alt="dashboard" />
+              <a href="/register">Register</a>
+              </li>
+            </>
+            }      
         </ul>
       </div>
     </div>
