@@ -5,19 +5,17 @@ import Profile from '../images/profile.png'
 import { useMenu, useMenuUpdate } from '../Contexts/MenuContext'
 
 
-const Sidebar = (auth) => {
 
+const Sidebar = ({auth}) => {
 
   const [closeMenu, setCloseMenu] = useState(false);
-  const handleCloseMenu = ()=>{
-
-    setCloseMenu(!closeMenu);
-  }
+  const user = auth?.user;
   
 
   const setMenu = useMenu();
   const updateMenu = useMenuUpdate();
-
+  
+  
   return (
     <div className={setMenu === false ? "sidebar": "sidebar active"}>
       <div className={setMenu === false ? "logoContainer": "logoContainer active"}>
@@ -30,12 +28,12 @@ const Sidebar = (auth) => {
       </div>
       <div className="profileContainer">
          {
-          auth.user ?
+          user ?
           <>
           <img src={Profile} alt="profile" className='profile' />
           <div className="profileContents">
-            <p className='name'>{auth.user.name}</p>
-            <p className='email'>{auth.user.email}</p>
+            <p className='name'>{user.name}</p>
+            <p className='email'>{user.email}</p>
         </div>
           </>
           :
@@ -50,8 +48,8 @@ const Sidebar = (auth) => {
       </div>
       <div className={setMenu === false ? "contentsContainer": "contentsContainer active"}>
         <ul>
-            {
-              auth.user ?
+            { 
+              user ?
               <>
                 <li className={location.pathname === "/galerija" ? "active" : ""}>
                 <img src={Dashboard} alt="dashboard" />
@@ -63,7 +61,7 @@ const Sidebar = (auth) => {
                 </li>
                 <li className="logout">
                 <img src={Dashboard} alt="dashboard" />
-                <a onClick={logOut}>Logout</a>
+                <a href='/dashboard'>Dashboard</a>
                 </li>
               </>
               :

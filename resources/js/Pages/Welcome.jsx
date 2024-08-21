@@ -6,7 +6,7 @@ import "../styles/variables.scss"
 
 
 
-export default function Welcome({ auth }) {
+export default function Welcome() {
 
     return ( 
         <MenuProvider>

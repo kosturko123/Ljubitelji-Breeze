@@ -43,7 +43,7 @@ useEffect(()=>{
               return(
                 <li key={index}>
                   <img src={user.slika} alt="" />
-                  <a href="">{user.username}</a>
+                  <a href="">{user.name}</a>
                 </li>
               )
             })

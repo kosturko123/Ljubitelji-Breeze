@@ -8,13 +8,18 @@ import FriendList from '@/Components/FriendList';
 
 
 
-export default function Welcome({ auth }) {
+export default function MainPage({auth}) {
+
+    const user = auth.user;
+    console.log(user);
 
     return ( 
         <MenuProvider>
-            <Sidebar/>
-            <SearchBar/>
+            
+            <Sidebar auth = {auth}/>
+            <SearchBar />
             <FriendList/>
+            
         </MenuProvider>
     );
 }
