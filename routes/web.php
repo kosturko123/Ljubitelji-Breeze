@@ -29,4 +29,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::get('/addpost', function(){
+    return Inertia::render('AddPost');       
+})->middleware(['auth', 'verified'])->name('addpost');
+
 require __DIR__.'/auth.php';
