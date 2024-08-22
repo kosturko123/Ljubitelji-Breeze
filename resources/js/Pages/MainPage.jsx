@@ -18,7 +18,7 @@ export default function MainPage({auth}) {
             
             <Sidebar auth = {auth}/>
             <SearchBar />
-            <FriendList/>
+            <FriendList auth ={auth}/>
             
         </MenuProvider>
     );

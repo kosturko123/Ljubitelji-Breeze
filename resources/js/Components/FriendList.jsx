@@ -3,8 +3,8 @@ import Logo from '../images/support.svg'
 import { useState } from 'react'
 import axios from 'axios'
 
-const FriendList = () => {
-
+const FriendList = ({auth}) => {
+  console.log(auth.user);
   const [users,setUsers] = useState([]);
 /*
   useEffect(()=>{
