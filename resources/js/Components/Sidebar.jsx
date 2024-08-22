@@ -59,7 +59,7 @@ const Sidebar = ({auth}) => {
                 <img src={Dashboard} alt="dashboard" />
                 <a href="/addpost">Nova Objava</a>
                 </li>
-                <li className="logout">
+                <li className={location.pathname === "/dashboard" ? "active" : ""}>
                 <img src={Dashboard} alt="dashboard" />
                 <a href='/dashboard'>Dashboard</a>
                 </li>
