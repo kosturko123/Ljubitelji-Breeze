@@ -4,22 +4,19 @@ import "../styles/main.scss"
 import "../styles/variables.scss"
 import SearchBar from '@/Components/SearchBar';
 import FriendList from '@/Components/FriendList';
-
+import AuthenticatedMain from '@/Layouts/AuthenticatedMain';
 
 
 
 export default function MainPage({auth}) {
 
-    const user = auth.user;
-    console.log(user);
-
     return ( 
         <MenuProvider>
-            
-            <Sidebar auth = {auth}/>
-            <SearchBar />
-            <FriendList auth ={auth}/>
-            
+            <AuthenticatedMain>
+                <Sidebar auth = {auth}/>
+                <SearchBar />
+                <FriendList/>
+            </AuthenticatedMain>  
         </MenuProvider>
     );
 }

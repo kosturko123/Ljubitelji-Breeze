@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
+
     /**
      * Transform the resource into an array.
      *
@@ -17,12 +18,26 @@ class UserResource extends JsonResource
         return [
             'type'  => 'user',
             'id'    => $this->id,
-            'name'  => $this->name,
-            'email'=> $this->email,
+            'attributes' =>[
+                'name'  => $this->name,
+                'email'=> $this->email
+            ],
             'links' =>[
-                'self' => route('users', $this->id)
+            'self' => route('users', $this->id)
             ]
 
         ];
+    }
+
+    public function with($request){
+        return [
+            'success'=>'success'
+        ];
+    }
+
+    public function withResponse($request,$response){
+        
+        $response ->header('Accept','application/json');
+        
     }
 }

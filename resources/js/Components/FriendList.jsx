@@ -3,8 +3,8 @@ import Logo from '../images/support.svg'
 import { useState } from 'react'
 import axios from 'axios'
 
-const FriendList = ({auth}) => {
-  console.log(auth.user);
+const FriendList = () => {
+  
   const [users,setUsers] = useState([]);
 /*
   useEffect(()=>{
@@ -23,10 +23,12 @@ const FriendList = ({auth}) => {
 },[]);
 */
 
+
 useEffect(()=>{
   (async () => {
+      
       const response = await axios.get('http://127.0.0.1:8000/api/users');
-      setUsers(response.data);
+      setUsers(response.data.data);
   })();
 },[]);
 
@@ -42,8 +44,8 @@ useEffect(()=>{
             users?.map((user,index)=>{
               return(
                 <li key={index}>
-                  <img src={user.slika} alt="" />
-                  <a href="">{user.name}</a>
+                  <img src={user.attributes.slika} alt="" />
+                  <a href="">{user.attributes.name}</a>
                 </li>
               )
             })

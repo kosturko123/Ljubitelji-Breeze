@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return new UserResource(User::all());
+        return new UserCollection(User::all());
     }
 
     /**

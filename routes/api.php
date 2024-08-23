@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 
 
-Route::middleware('auth')->group(function () {
+Route::get('/users', [UserController::class, 'index'])->name('users');
 
-    Route::apiResource('/users', UserController::class);
-
-});
+require __DIR__.'/auth.php';
