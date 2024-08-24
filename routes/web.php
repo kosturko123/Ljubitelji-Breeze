@@ -22,6 +22,11 @@ Route::get('/main', function(){
     return Inertia::render('MainPage');       
 })->middleware(['auth', 'verified'])->name('main');
 
+Route::get('/addpost', function(){
+    return Inertia::render('AddPost');       
+})->middleware(['auth', 'verified'])->name('addpost');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -29,8 +34,6 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/addpost', function(){
-    return Inertia::render('AddPost');       
-})->middleware(['auth', 'verified'])->name('addpost');
+
 
 require __DIR__.'/auth.php';

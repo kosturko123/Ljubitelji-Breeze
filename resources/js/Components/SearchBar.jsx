@@ -12,7 +12,7 @@ const SearchBar = () => {
   useEffect(()=>{
     const loadUsers = async()=>{
       const response = await axios.get('http://localhost:8000/api/users');
-      setUsers(response.data);
+      setUsers(response.data.data);
     }
     loadUsers();
 
@@ -23,7 +23,7 @@ const SearchBar = () => {
     if(text.length>0){
       matches = users.filter(user=>{
         const regex = new RegExp(`${text}`,"gi");
-        return user.username.match(regex);
+        return user.attributes.name.match(regex);
       })
     }
     
@@ -37,7 +37,7 @@ const SearchBar = () => {
   return (
     <div className={setMenu === false?"searchBar":"searchBar active"}>
         <div className='logoContainer'>
-            <img src={Icon} alt="logo" />
+          <img src={Icon} alt="logo" />
         </div>
         <div className='searchForm'>
             <div className='searchContainer'>
@@ -48,7 +48,7 @@ const SearchBar = () => {
          <div className='suggestionBox'>
          {
                   suggestions && suggestions.map((suggestion,i)=>{
-                    return <div className='suggestions' key={i}>{suggestion.username}</div>
+                    return <div className='suggestions' key={i}>{suggestion.attributes.name}</div>
                   })
                 }
          </div>
