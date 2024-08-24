@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Auth;
@@ -55,11 +56,11 @@ class PostController extends Controller
             Post::create([
                 'text' => $request->text,
                 'photo' => $filename,
-                'user_id' => $user->id
+                'user_id' => $request->id
             ]);
             return response()->json([
                 'message' => 'Post created successfully',
-                'file' => $filename,
+                'photo' => $filename,
                 'text' => $request->text
             ], 201);
         }
@@ -99,6 +100,42 @@ class PostController extends Controller
 
             return response()->json(['error' => 'An error occurred while creating the post'], 500);
         }*/
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'content' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust as needed
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        // Handle the image upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public');
+        }
+
+        // Create the post
+        $post = Post::create([
+            'content' => $request->content,
+            'image' => $imagePath,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'data' => $post,
+            'message' => 'Post created successfully',
+        ]);
+        
     }
 }
 

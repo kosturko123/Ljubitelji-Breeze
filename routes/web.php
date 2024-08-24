@@ -23,7 +23,7 @@ Route::get('/main', function(){
 })->middleware(['auth', 'verified'])->name('main');
 
 Route::get('/addpost', function(){
-    return Inertia::render('AddPost');       
+    return Inertia::render('AddPost2');       
 })->middleware(['auth', 'verified'])->name('addpost');
 
 

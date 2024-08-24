@@ -11,19 +11,71 @@ import React, { useState } from 'react'
 
 export default function AddPost2({auth}) {
 
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [image, setImage] = useState(null);
+    const [text, setText] = useState('');
+    const [photo, setPhoto] = useState(null);
 
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('image', image);
+    formData.append('text', text);
+    formData.append('photo', photo);
+    formData.append('id', auth.user.id)
 
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
+        setPhoto(e.target.files[0]);
       };
+
+    /*
+      const handlePostSubmit = async (e)=>{
+        e.preventDefault();
+        fetch('http://localhost:8000/api/addpost', {
+            method: 'POST',
+            body: formData,
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Success:', data);
+            // Reset form fields
+            setText('');
+            setPhoto(null);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+        
+    }
+    */
+
+    const handlePostSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+            const response = await axios.post('http://localhost:8000/api/addpost', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data', // Since you're uploading files
+                }
+            });
+    
+            console.log('Success:', response.data);
+    
+            // Reset form fields
+            setText('');
+            setPhoto(null);
+        } catch (error) {
+            console.error('Error:', error);
+    
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log('Error Response:', error.response.data);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.log('Error Request:', error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error Message:', error.message);
+            }
+        }
+    }
  
     return (
         <AuthenticatedLayout
@@ -41,34 +93,19 @@ export default function AddPost2({auth}) {
                 
             </div>
                 
-            <form >
-                <div>
-                    <InputLabel htmlFor="title" value="Title" />
-
-                    <TextInput
-                        id="title"
-                        type="text"
-                        name="title"
-                        value={title}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-
+            <form onSubmit={handlePostSubmit}>
+                
                 <div className="mt-4 h">
                     <InputLabel htmlFor="content" value="Content" />
 
                     <TextArea
-                        id="content"
-                        name="content"
+                        id="text"
+                        name="text"
                         type = "textarea"
-                        rows = "5"
-                        value = {content}
+                        rows = "5"  
+                        value = {text}
                         className="mt-1 block w-full h"
-                        onChange={(e) => setContent(e.target.value)}
+                        onChange={(e) => setText(e.target.value)}
                         required
                     />
                 </div>
@@ -79,11 +116,11 @@ export default function AddPost2({auth}) {
             </label>
             <input
               type="file"
-              id="image"
-              name="image"
+              id="photo"
+              name="photo"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={handleImageChange}
-              accept="image/*"
+              accept="image"
               required
             />
           </div>
