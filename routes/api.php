@@ -14,4 +14,5 @@ Route::middleware('auth')->group(function () {
 // Osigurava da je autentifikovan korisnik
 //Route::middleware('auth:sanctum')->post('/addpost', [PostController::class, 'addPost']);
 
-Route::post('/addpost', [PostController::class, 'addPost']);
+//Route::post('/addpost', [PostController::class, 'addPost']);
+Route::middleware('auth:sanctum')->post('/addpost', [PostController::class, 'addPost']);
