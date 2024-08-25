@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
-
+Route::get('/brewery', function(){
+    return Inertia::render('Brewery');       
+})->middleware(['auth', 'verified'])->name('brewery');
 
 require __DIR__.'/auth.php';
