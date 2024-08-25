@@ -137,6 +137,12 @@ class PostController extends Controller
         ]);
         
     }
+
+    public function getPosts()
+    {
+        $posts = Post::select('photo')->paginate(5); // Fetch only the 'image' column
+        return response()->json($posts);
+    }
 }
 
 

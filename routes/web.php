@@ -26,6 +26,10 @@ Route::get('/addpost', function(){
     return Inertia::render('AddPost2');       
 })->middleware(['auth', 'verified'])->name('addpost');
 
+Route::get('/gallery', function(){
+    return Inertia::render('Gallery');       
+})->middleware(['auth', 'verified'])->name('gallery');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

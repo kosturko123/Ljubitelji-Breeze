@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Icon from "../images/LogoWhite.svg"
 import Dashboard from '../images/dashboard.svg'
 import { useMenu, useMenuUpdate } from '../Contexts/MenuContext'
+import Picture from '../images/profile.png'
 
 
 
@@ -10,7 +11,7 @@ const Sidebar = ({auth}) => {
   const [closeMenu, setCloseMenu] = useState(false);
   const user = auth?.user;
 
-  const imageUrl = user.user_image ? `/uploads/user_images/${user.user_image}` : '../images/profile.png';
+  const imageUrl = user?.user_image ? `/uploads/user_images/${user.user_image}` : Picture;
   
 
   const setMenu = useMenu();
@@ -54,7 +55,7 @@ const Sidebar = ({auth}) => {
               <>
                 <li className={location.pathname === "/galerija" ? "active" : ""}>
                 <img src={Dashboard} alt="dashboard" />
-                <a href="/galerija">Galerija</a>
+                <a href="/gallery">Galerija</a>
                 </li>
                 <li className="addPost">
                 <img src={Dashboard} alt="dashboard" />
