@@ -180,7 +180,9 @@ h3{
         padding: 3rem 0 0 0;
 
         img {
-            width: auto;
+            width: 100%;
+            max-width: 50px;
+            border-radius: 25px;
             height: 3rem;
         }
 
@@ -231,6 +233,10 @@ h3{
 
                 img {
                     padding: 0 1rem 0 0.5rem;
+                    width: 100%;
+                    max-width: 50px;
+                    border-radius: 25px;
+                    height: 3rem;
                 }
 
                 a {

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_image'
     ];
 
     /**
@@ -54,5 +55,9 @@ class User extends Authenticatable
     }
     public function email():string{
         return $this->email;
+    }
+
+    public function user_image():string{
+        return $this->user_image;
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserCollection;
-use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           //
     }
 
     /**

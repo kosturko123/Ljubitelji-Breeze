@@ -20,7 +20,8 @@ class UserResource extends JsonResource
             'id'    => $this->id,
             'attributes' =>[
                 'name'  => $this->name,
-                'email'=> $this->email
+                'email'=> $this->email,
+                'user_image' => $this->user_image
             ],
             'links' =>[
             'self' => route('users', $this->id)
