@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::post('/addpost', [PostController::class, 'addPost']);
+//Route::post('/storePicture',[UserController::class,'storePicture'])->name('storePicture');
 
 
 require __DIR__.'/auth.php';

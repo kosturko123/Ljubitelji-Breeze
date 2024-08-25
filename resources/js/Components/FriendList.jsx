@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import Logo from '../images/support.svg'
 import { useState } from 'react'
 import axios from 'axios'
+import Picture from '../images/profile.png'
 
 const FriendList = () => {
   
   const [users,setUsers] = useState([]);
+  
 /*
   useEffect(()=>{
     (async () => {
@@ -44,7 +46,7 @@ useEffect(()=>{
             users?.map((user,index)=>{
               return(
                 <li key={index}>
-                  <img src={user.attributes.slika} alt="" />
+                  <img src={user.attributes.user_image ? `/uploads/user_images/${user.attributes.user_image}` : Picture} alt="" />
                   <a href="">{user.attributes.name}</a>
                 </li>
               )

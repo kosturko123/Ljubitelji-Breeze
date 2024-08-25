@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Icon from "../images/LogoWhite.svg"
 import Dashboard from '../images/dashboard.svg'
-import Profile from '../images/profile.png'
 import { useMenu, useMenuUpdate } from '../Contexts/MenuContext'
 
 
@@ -10,6 +9,8 @@ const Sidebar = ({auth}) => {
 
   const [closeMenu, setCloseMenu] = useState(false);
   const user = auth?.user;
+
+  const imageUrl = user.user_image ? `/uploads/user_images/${user.user_image}` : '../images/profile.png';
   
 
   const setMenu = useMenu();
@@ -30,7 +31,7 @@ const Sidebar = ({auth}) => {
          {
           user ?
           <>
-          <img src={Profile} alt="profile" className='profile' />
+          <img src={imageUrl} alt="profile" className='profile' />
           <div className="profileContents">
             <p className='name'>{user.name}</p>
             <p className='email'>{user.email}</p>
@@ -38,7 +39,7 @@ const Sidebar = ({auth}) => {
           </>
           :
           <>
-          <img src={Profile} alt="profile" className='profile' />
+          <img src={imageUrl} alt="profile" className='profile' />
           <div className="profileContents">
             <p className='name'>Guest</p>
             <p className='email'>Guest</p>
