@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -42,5 +45,14 @@ Route::middleware('auth')->group(function () {
 Route::get('/brewery', function(){
     return Inertia::render('Brewery');       
 })->middleware(['auth', 'verified'])->name('brewery');
+
+Route::get('/comments', function(){
+    return Inertia::render('Comments');       
+})->middleware(['auth', 'verified'])->name('comments');
+
+Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::post('/posts/{postId}/comments', [CommentController::class, 'store']);
+Route::post('/posts/{postId}/like', [LikeController::class, 'likePost']);
+
 
 require __DIR__.'/auth.php';
