@@ -2,10 +2,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TextArea from '@/Components/TextArea';
+
 
 const CommentPage = ({auth}) => {
 
@@ -33,17 +33,16 @@ const CommentPage = ({auth}) => {
             boxShadow: '0 0 3px 1px #F5A209',
         }
     };
-
-    //const { postId } = useParams(); // Get the post ID from the URL
-    const postId = 1;
-
-
-    const [post, setPost] = useState(null); // State to hold the post data
-    const [comment, setComment] = useState(''); // State for new comment input
-    const [comments, setComments] = useState([]); // State to hold comments
-    const [likes, setLikes] = useState(0); // State to hold likes count
+    
+    const [post, setPost] = useState(null); 
+    const [comment, setComment] = useState(''); 
+    const [comments, setComments] = useState([]); 
+    const [likes, setLikes] = useState(0); 
+    const path = window.location.pathname;
+    const postId = path.split('/').pop();
+    
     useEffect(() => {
-        // Fetch the post data based on the postId
+        
         axios.get(`/posts/${postId}`)
             .then(response => {
                 const postData = response.data;

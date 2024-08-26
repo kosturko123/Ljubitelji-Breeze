@@ -3,6 +3,7 @@ import "../styles/main.scss"
 import "../styles/variables.scss"
 import axios from 'axios';
 
+
 const GalleryComponent = ({auth}) => {
     const [images, setImages] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +36,7 @@ const GalleryComponent = ({auth}) => {
             <div className="gallery-grid">
                 {images.map((image, index) => (
                     <div key={index} className="gallery-item">
-                        <a href=''>
+                        <a href={`/image/${image.id}`}>
                         <img 
                             src={`/uploads/${image.photo}`} 
                             alt={`Gallery image ${index + 1}`} 

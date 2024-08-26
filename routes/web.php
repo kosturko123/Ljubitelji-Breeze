@@ -46,9 +46,9 @@ Route::get('/brewery', function(){
     return Inertia::render('Brewery');       
 })->middleware(['auth', 'verified'])->name('brewery');
 
-Route::get('/comments', function(){
+Route::get('/image/{id}', function(){
     return Inertia::render('Comments');       
-})->middleware(['auth', 'verified'])->name('comments');
+})->middleware(['auth', 'verified'])->name('image');
 
 Route::get('/posts/{id}', [PostController::class, 'show']);
 Route::post('/posts/{postId}/comments', [CommentController::class, 'store']);
