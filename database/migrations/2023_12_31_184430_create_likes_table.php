@@ -24,7 +24,9 @@ return new class extends Migration
                 ->references('id')
                 ->on('posts')
                 ->onDelete('cascade');
+            $table->unique(['user_id', 'post_id']); 
         });
+        
     }
 
     /**

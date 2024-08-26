@@ -13,6 +13,7 @@ const BreweryInfo = ({auth}) => {
     const [brewery, setBrewery] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    
     // Style
     const style = {
         container: {
@@ -20,6 +21,10 @@ const BreweryInfo = ({auth}) => {
             padding: '20px',
             borderRadius: '5px',
             textAlign: 'center',
+        },
+        align: {
+            marginLeft: '15%',
+            textAlign: 'left',
         }
     };
 
@@ -57,7 +62,7 @@ const BreweryInfo = ({auth}) => {
                     <div>
                         <Head title="Pivare"/>
                         <div className='flex justify-center mb-4'>
-                            <ApplicationLogo className="w-32 h-32"/>
+                            <ApplicationLogo/>
                         </div>
                         <h3>Informacije o pivari:</h3>
                         {loading && <p>Učitavanje...</p>}
@@ -65,11 +70,13 @@ const BreweryInfo = ({auth}) => {
                         {brewery && (
                         <div style={style.container}>
                             <h1>{brewery.name}</h1>
-                            <p><strong>Tip pivare:</strong> {brewery.brewery_type}</p>
-                            <p><strong>Sajt:</strong> <a href={brewery.website_url} target="_blank">{brewery.website_url}</a></p>
-                            <p><strong>Adresa:</strong> {brewery.address_1}</p>
-                            <p><strong>Grad:</strong> {brewery.city}</p>
-                            <p><strong>Država:</strong> {brewery.country}</p>
+                            <div style={style.align}>
+                                <p><strong>Tip pivare:</strong> {brewery.brewery_type}</p>
+                                <p><strong>Sajt:</strong> <a href={brewery.website_url} target="_blank">{brewery.website_url}</a></p>
+                                <p><strong>Adresa:</strong> {brewery.address_1}</p>
+                                <p><strong>Grad:</strong> {brewery.city}</p>
+                                <p><strong>Država:</strong> {brewery.country}</p>
+                            </div>
                         </div>
                         )}
                     </div>

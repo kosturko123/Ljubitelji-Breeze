@@ -55,7 +55,7 @@ export default function AddPost2({ auth }) {
             <div className="flex items-center justify-center  bg-gray-100">
                 <div className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl mt-8 px-8 py-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
                     <div className='flex justify-center mb-4'>
-                        <ApplicationLogo className="w-32 h-32 fill-current text-gray-500"/>
+                        <ApplicationLogo/>
                     </div>
                     <form onSubmit={handlePostSubmit}>
                         <div className="mt-4 h">
