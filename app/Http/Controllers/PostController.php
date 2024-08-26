@@ -138,9 +138,11 @@ class PostController extends Controller
         
     }
 
-    public function getPosts()
+    public function getPosts($userId, Request $request)
     {
-        $posts = Post::select('photo')->paginate(5); // Fetch only the 'image' column
+        $posts = Post::where('user_id', $userId)
+        ->paginate(3);
+
         return response()->json($posts);
     }
 }

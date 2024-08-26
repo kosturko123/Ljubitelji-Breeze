@@ -539,54 +539,6 @@ h3{
     align-items: flex-start;
 }
 
-.galerija{
-   margin-top: 8%; 
-   margin-left: 20%;
-   margin-right: 20%;
-   width: 100%;
-   height: 100vh;
-   flex-grow: 1;
-}
-
-.pictureContainer{
-    padding: 10px;
-    margin: auto;
-}
-
-.pictureZoomed{
-    width: 60%;
-    height: 100%;
-    background: black;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    
-}
-
-.picture{
-    width: auto;
-    max-width: 50%;
-    max-height: 50%;
-}
-
-.btnClose{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.galerija.active{
-    transition: margin 1s ease-in-out;
-    margin-left: 10%;
-}
-
-.pictureZoomed.active{
-    transition: margin 1s ease-in-out;
-    width: 70%;
-}
-
 .dashboard{
   border-radius: 10%;
   padding: 5%;
@@ -660,38 +612,52 @@ h3{
 }
 
 /* gallery.css */
+
 .gallery-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    margin-left: 330px;
     padding: 20px;
 }
 
 .gallery-title {
-    text-align: center;
-    font-size: 2rem;
+    text-align: top;
     margin-bottom: 20px;
+    max-height: fit-content;
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-image {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
     object-fit: cover;
-    transition: transform 0.3s ease-in-out;
 }
 
-.gallery-item:hover .gallery-image {
-    transform: scale(1.05);
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    line-height: 2.5;
 }

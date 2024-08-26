@@ -1,44 +1,22 @@
+import FriendList from '@/Components/FriendList';
+import GalleryComponent from '@/Components/GalleryComponent';
+import Sidebar from '@/Components/Sidebar';
+import "../styles/main.scss"
+import "../styles/variables.scss"
 import React from 'react';
-import Gallery from './Gallery';
-import {useEffect, useState } from 'react';
-import axios from 'axios';
+import { MenuProvider } from '@/Contexts/MenuContext';
+import AuthenticatedMain from '@/Layouts/AuthenticatedMain';
 
-const GalleryPage = () => {
-    // Sample array of image URLs
-    const [images, setImages] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        // Fetch images from the backend
-        const fetchImages = async () => {
-            setLoading(true);
-            try {
-                const response = await axios.get('http://localhost:8000/api/getposts'); // Adjust the URL as needed
-                setImages(prevImages => [...prevImages, ...response.data.data]);
-                setTotalPages(response.data.last_page);
-            } catch (error) {
-                console.error('Error fetching images:', error);
-            }
-            finally{
-                setLoading(false);
-            }
-        };
-
-        fetchImages();
-    }, [currentPage]);
-
-    const loadMore = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(prevPage => prevPage + 1);
-        }
-    };
-
+const GalleryPage = ({auth}) => {
     return (
-        <div>
-            <Gallery images={images} />
-        </div>
+        <MenuProvider>
+            <AuthenticatedMain className="flex min-h-screen">
+                <Sidebar auth ={auth}  lassName="w-64 bg-gray-800 text-white p-4"/>
+                <GalleryComponent auth ={auth} className="flex-1 p-4 bg-white"/>
+                <FriendList className="w-48 bg-gray-100 p-4"s/>
+            </AuthenticatedMain>
+        </MenuProvider>
     );
 };
 

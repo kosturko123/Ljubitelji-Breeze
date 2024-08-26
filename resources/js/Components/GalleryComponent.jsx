@@ -1,21 +1,67 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/main.scss"
 import "../styles/variables.scss"
+import axios from 'axios';
 
-const Gallery = ({ images }) => {
+const GalleryComponent = ({auth}) => {
+    const [images, setImages] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const userId = auth.user.id;
+
+    useEffect(() => {
+        fetchImages(currentPage);
+    }, [currentPage]);
+
+    const fetchImages = async (page) => {
+        try {
+            const response = await axios.get(`http://localhost:8000/api/users/${userId}/posts?page=${page}`);
+            setImages(response.data.data); // assuming `data` contains the images array
+            setTotalPages(response.data.last_page); // `last_page` is the number of total pages
+        } catch (error) {
+            console.error('Error fetching images:', error);
+        }
+    };
+
+    const handlePageChange = (newPage) => {
+        if (newPage > 0 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
+    };
 
     return (
         <div className="gallery-container">
-            <h1 className="gallery-title">Image Gallery</h1>
+            <h2 className="gallery-title ">Image Gallery</h2>
             <div className="gallery-grid">
                 {images.map((image, index) => (
                     <div key={index} className="gallery-item">
-                        <img src={image} alt={`Gallery image ${index + 1}`} className="gallery-image" />
+                        <a href=''>
+                        <img 
+                            src={`/uploads/${image.photo}`} 
+                            alt={`Gallery image ${index + 1}`} 
+                            className="gallery-image" 
+                        />
+                        </a>
                     </div>
                 ))}
+            </div>
+            <div className="pagination mt-4">
+                <button 
+                    onClick={() => handlePageChange(currentPage - 1)} 
+                    disabled={currentPage === 1}
+                >
+                    Previous
+                </button>
+                <span>{currentPage} of {totalPages}</span>
+                <button 
+                    onClick={() => handlePageChange(currentPage + 1)} 
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
 };
 
-export default Gallery;
+export default GalleryComponent;
