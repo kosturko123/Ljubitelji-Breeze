@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +18,13 @@ Route::get('/', function () {
     ]);
 })->middleware(['guest']);
 
+/*
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+*/
+
+Route::get('/home', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('home');;
 
 Route::get('/main', function(){
     return Inertia::render('MainPage');       
@@ -42,9 +47,12 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
+
 Route::get('/brewery', function(){
     return Inertia::render('Brewery');       
-})->middleware(['auth', 'verified'])->name('brewery');
+})->middleware(['auth', 'verified','admin'])->name('brewery');
+
 
 Route::get('/image/{id}', function(){
     return Inertia::render('Comments');       
