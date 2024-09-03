@@ -48,7 +48,7 @@ const SearchBar = () => {
          <div className='suggestionBox'>
          {
                   suggestions && suggestions.map((suggestion,i)=>{
-                    return <div className='suggestions' key={i}>{suggestion.attributes.name}</div>
+                    return <div className='suggestions' key={i}><a href={`/gallery/${suggestion.id}`}>{suggestion.attributes.name}</a></div>
                   })
                 }
          </div>
