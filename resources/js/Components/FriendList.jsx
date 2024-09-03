@@ -47,7 +47,7 @@ useEffect(()=>{
               return(
                 <li key={index}>
                   <img src={user.attributes.user_image ? `/uploads/user_images/${user.attributes.user_image}` : Picture} alt="" />
-                  <a href="">{user.attributes.name}</a>
+                  <a href={`/gallery/${user.id}`}>{user.attributes.name}</a>
                 </li>
               )
             })

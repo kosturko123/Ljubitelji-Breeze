@@ -39,6 +39,11 @@ Route::get('/gallery', function(){
 })->middleware(['auth', 'verified'])->name('gallery');
 
 
+Route::get('/gallery/{id}', function(){
+    return Inertia::render('OtherUserGallery');
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
